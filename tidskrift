@@ -1,0 +1,45 @@
+ // EXTRA: Tidskrift ärver från Biblioteksmedia och implementerar IUtlaningsbar
+    public class Tidskrift : Biblioteksmedia, IUtlaningsbar
+    {
+        public int Nummer { get; set; }
+        public bool ArUtlanad { get; private set; }
+ 
+        public Tidskrift(string titel, int utgivningsar, int nummer)
+            : base(titel, utgivningsar)
+        {
+            Nummer = nummer;
+            ArUtlanad = false;
+        }
+ 
+        public override string Beskrivning()
+        {
+            return $"Tidskrift: {base.Beskrivning()}, nr {Nummer}";
+        }
+ 
+        public void LanaUt()
+        {
+            if (ArUtlanad)
+            {
+                Console.WriteLine($"\"{Titel}\" är redan utlånad.");
+            }
+            else
+            {
+                ArUtlanad = true;
+                Console.WriteLine($"\"{Titel}\" är nu utlånad.");
+            }
+        }
+ 
+        public void LamnaTillbaka()
+        {
+            if (ArUtlanad)
+            {
+                ArUtlanad = false;
+                Console.WriteLine($"\"{Titel}\" är tillbakalämnad.");
+            }
+            else
+            {
+                Console.WriteLine($"\"{Titel}\" var inte utlånad.");
+            }
+        }
+    }
+}
