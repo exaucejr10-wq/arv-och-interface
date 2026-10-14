@@ -1,0 +1,49 @@
+ // Bok ärver från Biblioteksmedia (": Biblioteksmedia")
+    // och implementerar interfacet IUtlaningsbar.
+    public class Bok : Biblioteksmedia, IUtlaningsbar
+    {
+        public string Forfattare { get; set; }
+        public bool ArUtlanad { get; private set; }
+ 
+        // ": base(titel, utgivningsar)" skickar vidare värdena till basklassens konstruktor
+        public Bok(string titel, int utgivningsar, string forfattare)
+            : base(titel, utgivningsar)
+        {
+            Forfattare = forfattare;
+            ArUtlanad = false;
+        }
+ 
+        // "override" skriver om basklassens Beskrivning()
+        public override string Beskrivning()
+        {
+            return $"Bok: {base.Beskrivning()} av {Forfattare}";
+        }
+ 
+        public void LanaUt()
+        {
+            if (ArUtlanad)
+            {
+                Console.WriteLine($"\"{Titel}\" är redan utlånad.");
+            }
+            else
+            {
+                ArUtlanad = true;
+                Console.WriteLine($"\"{Titel}\" är nu utlånad.");
+            }
+        }
+ 
+        public void LamnaTillbaka()
+        {
+            if (ArUtlanad)
+            {
+                ArUtlanad = false;
+                Console.WriteLine($"\"{Titel}\" är tillbakalämnad.");
+            }
+            else
+            {
+                Console.WriteLine($"\"{Titel}\" var inte utlånad.");
+            }
+        }
+    }
+}
+ 
