@@ -1,0 +1,23 @@
+ // Basklass för allt som finns i biblioteket (böcker, filmer, tidskrifter).
+    // "abstract" betyder att man inte kan skapa en "ren" Biblioteksmedia,
+    // bara saker som ärver från den (t.ex. Bok eller Film).
+    public abstract class Biblioteksmedia
+    {
+        // Egenskaper som ALLA medier har gemensamt
+        public string Titel { get; set; }
+        public int Utgivningsar { get; set; }
+ 
+        // Konstruktor – körs när ett nytt objekt skapas
+        public Biblioteksmedia(string titel, int utgivningsar)
+        {
+            Titel = titel;
+            Utgivningsar = utgivningsar;
+        }
+ 
+        // "virtual" betyder att klasser som ärver får skriva om (override) metoden
+        public virtual string Beskrivning()
+        {
+            return $"{Titel} ({Utgivningsar})";
+        }
+    }
+}
