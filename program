@@ -1,0 +1,51 @@
+internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Skapa objekt
+            Bok bok = new Bok("Röda rummet", 1879, "August Strindberg");
+            Film film = new Film("Jakten på en mördare", 2015, 118);
+            Tidskrift tidskrift = new Tidskrift("Ny Teknik", 2026, 10);
+            Sallskapsspel spel = new Sallskapsspel("Monopol", 6);
+ 
+            // ARV + POLYMORFI:
+            // En lista av typen Biblioteksmedia kan innehålla Bok, Film och Tidskrift,
+            // eftersom alla ärver från Biblioteksmedia. Rätt Beskrivning() anropas för varje.
+            Console.WriteLine("=== Alla medier i biblioteket ===");
+            List<Biblioteksmedia> medier = new List<Biblioteksmedia> { bok, film, tidskrift };
+            foreach (Biblioteksmedia media in medier)
+            {
+                Console.WriteLine(media.Beskrivning());
+            }
+ 
+            Console.WriteLine(spel.Beskrivning());
+ 
+            // INTERFACE:
+            // En lista av typen IUtlaningsbar kan innehålla allt som kan lånas ut –
+            // även Sällskapsspel, fast det inte är ett Biblioteksmedia.
+            Console.WriteLine();
+            Console.WriteLine("=== Utlåning ===");
+            List<IUtlaningsbar> lanbara = new List<IUtlaningsbar> { bok, film, tidskrift, spel };
+            foreach (IUtlaningsbar sak in lanbara)
+            {
+                sak.LanaUt();
+            }
+ 
+            // Testa att låna samma sak två gånger
+            Console.WriteLine();
+            Console.WriteLine("=== Försök låna boken igen ===");
+            bok.LanaUt();
+ 
+            Console.WriteLine();
+            Console.WriteLine("=== Återlämning ===");
+            foreach (IUtlaningsbar sak in lanbara)
+            {
+                sak.LamnaTillbaka();
+            }
+ 
+            Console.WriteLine();
+            Console.WriteLine("Tryck på valfri tangent för att avsluta...");
+            Console.ReadKey();
+        }
+    }
+}
