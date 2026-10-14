@@ -1,0 +1,10 @@
+// Ett interface är ett "kontrakt": alla klasser som implementerar det
+    // MÅSTE ha dessa medlemmar. Det säger VAD som ska finnas, inte HUR.
+    public interface IUtlaningsbar
+    {
+        bool ArUtlanad { get; }
+        void LanaUt();
+        void LamnaTillbaka();
+    }
+}
+ 
