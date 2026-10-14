@@ -1,0 +1,45 @@
+// Film ärver från Biblioteksmedia och kan lånas ut
+    public class Film : Biblioteksmedia, IUtlaningsbar
+    {
+        public int SpeltidMinuter { get; set; }
+        public bool ArUtlanad { get; private set; }
+ 
+        public Film(string titel, int utgivningsar, int speltidMinuter)
+            : base(titel, utgivningsar)
+        {
+            SpeltidMinuter = speltidMinuter;
+            ArUtlanad = false;
+        }
+ 
+        public override string Beskrivning()
+        {
+            return $"Film: {base.Beskrivning()}, {SpeltidMinuter} min";
+        }
+ 
+        public void LanaUt()
+        {
+            if (ArUtlanad)
+            {
+                Console.WriteLine($"\"{Titel}\" är redan utlånad.");
+            }
+            else
+            {
+                ArUtlanad = true;
+                Console.WriteLine($"\"{Titel}\" är nu utlånad.");
+            }
+        }
+ 
+        public void LamnaTillbaka()
+        {
+            if (ArUtlanad)
+            {
+                ArUtlanad = false;
+                Console.WriteLine($"\"{Titel}\" är tillbakalämnad.");
+            }
+            else
+            {
+                Console.WriteLine($"\"{Titel}\" var inte utlånad.");
+            }
+        }
+    }
+}
